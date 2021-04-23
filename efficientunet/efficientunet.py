@@ -96,11 +96,10 @@ def _get_efficient_unet(encoder, out_channels=3, block_type='upsampling', concat
 
     input_ = encoder.input
     head = encoder.get_layer('head_swish').output
+    blocks = [input_] + MBConvBlocks + [head]
     
     if not unet:
-        MBConvBlocks = [None for x in MBConvBlocks]
-    
-    blocks = [input_] + MBConvBlocks + [head]
+        blocks[:-1] = [None for x in blocks[:-1]]
 
     if block_type == 'upsampling':
         UpBlock = UpSampling2D_block
