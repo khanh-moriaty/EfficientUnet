@@ -82,7 +82,7 @@ def Conv2DTranspose_block(filters, kernel_size=(3, 3), transpose_kernel_size=(2,
 
 
 # noinspection PyTypeChecker
-def _get_efficient_unet(encoder, out_channels=2, block_type='upsampling', concat_input=True):
+def _get_efficient_unet(encoder, out_channels=3, block_type='upsampling', concat_input=True, unet=True):
     MBConvBlocks = []
 
     skip_candidates = get_blocknr_of_skip_candidates(encoder)
@@ -96,6 +96,10 @@ def _get_efficient_unet(encoder, out_channels=2, block_type='upsampling', concat
 
     input_ = encoder.input
     head = encoder.get_layer('head_swish').output
+    
+    if not unet:
+        MBConvBlock = [None, None, None, None]
+    
     blocks = [input_] + MBConvBlocks + [head]
 
     if block_type == 'upsampling':
@@ -119,7 +123,7 @@ def _get_efficient_unet(encoder, out_channels=2, block_type='upsampling', concat
     return model
 
 
-def get_efficient_unet_b0(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b0(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B0 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -133,7 +137,7 @@ def get_efficient_unet_b0(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b1(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b1(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B1 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -147,7 +151,7 @@ def get_efficient_unet_b1(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b2(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b2(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B2 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -161,7 +165,7 @@ def get_efficient_unet_b2(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b3(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b3(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B3 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -175,7 +179,7 @@ def get_efficient_unet_b3(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b4(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b4(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B4 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -189,7 +193,7 @@ def get_efficient_unet_b4(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b5(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b5(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B5 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -203,7 +207,7 @@ def get_efficient_unet_b5(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b6(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b6(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B6 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
@@ -217,7 +221,7 @@ def get_efficient_unet_b6(input_shape, out_channels=2, pretrained=False, block_t
     return model
 
 
-def get_efficient_unet_b7(input_shape, out_channels=2, pretrained=False, block_type='transpose', concat_input=True):
+def get_efficient_unet_b7(input_shape, out_channels=3, pretrained=False, block_type='transpose', concat_input=True):
     """Get a Unet model with Efficient-B7 encoder
     :param input_shape: shape of input (cannot have None element)
     :param out_channels: the number of output channels
